@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banking App</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 25px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .balance-box {
+        background: rgba(0, 0, 0, 0.25);
+        padding: 15px;
+        border-radius: 15px;
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .deposit-btn {
+        background: #00f260;
+        color: #000;
+    }
+    .deposit-btn:hover {
+        background: #00c94f;
+    }
+
+    .withdraw-btn {
+        background: #ff512f;
+        color: #fff;
+    }
+    .withdraw-btn:hover {
+        background: #e84522;
+    }
+
+    .message {
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+        min-height: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .container {
+            padding: 20px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🏦  Aman's Bank me apka sawagat hai</h2>
+
+    <div class="balance-box">
+        Balance: ₹ <span id="balance">0</span>
+    </div>
+
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <button class="deposit-btn" onclick="deposit()">Deposit</button>
+    <button class="withdraw-btn" onclick="withdraw()">Withdraw</button>
+
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    let balance = 0;
+
+    function deposit() {
+        let amt = Number(document.getElementById("amount").value);
+        let msg = document.getElementById("message");
+
+        if (amt > 0) {
+            balance += amt;
+            document.getElementById("balance").innerText = balance;
+            msg.style.color = "#00ff99";
+            msg.innerText = "Amount deposited successfully!";
+        } else {
+            msg.style.color = "yellow";
+            msg.innerText = "Enter valid amount!";
+        }
+    }
+
+    function withdraw() {
+        let amt = Number(document.getElementById("amount").value);
+        let msg = document.getElementById("message");
+
+        if (amt > 0 && amt <= balance) {
+            balance -= amt;
+            document.getElementById("balance").innerText = balance;
+            msg.style.color = "#ffcc00";
+            msg.innerText = "Withdrawal successful!";
+        } else {
+            msg.style.color = "red";
+            msg.innerText = "Insufficient balance or invalid amount!";
+        }
+    }
+</script>
+
+</body>
+</html>
